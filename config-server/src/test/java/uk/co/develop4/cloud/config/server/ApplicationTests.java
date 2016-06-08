@@ -13,6 +13,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.util.LinkedMultiValueMap;
@@ -21,17 +22,18 @@ import org.springframework.util.MultiValueMap;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ConfigServerApplication.class)
 @WebAppConfiguration
-@IntegrationTest("server.port=0")
+@IntegrationTest({"server.port=0"})
+@ActiveProfiles("dev")
 public class ApplicationTests {
 
 	@Value("${local.server.port}")
-	private int port = 0;
+	private int port;
 
 	@Test
 	public void configurationAvailable() {
 		@SuppressWarnings("rawtypes")
 		ResponseEntity<Map> entity = new TestRestTemplate().getForEntity(
-				"http://localhost:" + port + "/app/cloud", Map.class);
+				"http://localhost:" + port + "/test-application/dev", Map.class);
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
 	}
 
