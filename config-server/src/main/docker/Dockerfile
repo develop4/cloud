@@ -1,6 +1,6 @@
 FROM java:8-jre
 
-ADD config-server-0.0.1-SNAPSHOT.jar app.jar
+ADD configserver-0.0.1-SNAPSHOT.jar app.jar
 VOLUME /tmp
 VOLUME /target
 

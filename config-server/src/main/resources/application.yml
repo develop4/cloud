@@ -1,17 +1,18 @@
+server:
+  port: 8888
+  
+logging:
+  level:
+    com.netflix.discovery: 'OFF'
+    org.springframework.cloud: 'DEBUG'
+    
 spring:
   cloud:
     config:
       server:
-#        native:
-#          search-locations: classpath:/shared-local
         git:
-          uri: https://github.com/develop4/cloud-config-files/example
-  profiles:
-     active: native
-
-server:
-  port: 8888
-
+          uri: https://github.com/develop4/cloud-config-files
+          
 security:
   user:
     password: ${CONFIG_SERVICE_PASSWORD:mypassword}
